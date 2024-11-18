@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+#### Архитектура приложения
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. **Фронтенд**:
+   - **React**: Используется для создания пользовательского интерфейса. React позволяет создавать компоненты, которые могут быть повторно использованы и легко управляемы.
+   - **React Router**: Используется для маршрутизации в приложении, что позволяет пользователям перемещаться между различными страницами (например, панель администратора, список тикетов, список пользователей).
+   - **Axios**: Библиотека для выполнения HTTP-запросов к бэкенду, что позволяет получать и отправлять данные.
 
-## Available Scripts
+2. **Бэкенд**:
+   - **Node.js**: Используется для создания сервера и обработки запросов от клиента.
+   - **Express**: Веб-фреймворк для Node.js, который упрощает создание API и маршрутизацию.
+   - **PostgreSQL**: Реляционная база данных, используемая для хранения данных о пользователях, тикетах и комментариях.
+   - **CORS**: Middleware для включения поддержки кросс-доменных запросов, что позволяет фронтенду взаимодействовать с бэкендом.
 
-In the project directory, you can run:
+#### Структура проекта
 
-### `npm start`
+```
+helpdesk-app/
+├── client/                # Фронтенд на React
+│   ├── public/
+│   ├── src/
+│   │   ├── components/    # Компоненты React
+│   │   ├── pages/         # Страницы для маршрутизации
+│   │   ├── App.js         # Главный компонент приложения
+│   │   ├── index.js       # Точка входа
+│   │   └── index.css      # Глобальные стили
+├── server/                # Бэкенд на Node.js
+│   ├── models/            # Модели базы данных
+│   ├── routes/            # API маршруты
+│   ├── config/            # Конфигурация базы данных
+│   ├── server.js          # Главный файл сервера
+└── package.json
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Основные компоненты
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Компоненты фронтенда**:
+   - **AdminPanel**: Панель администратора, где администраторы могут управлять тикетами и пользователями.
+   - **TicketList**: Компонент для отображения списка тикетов.
+   - **TicketDetail**: Компонент для отображения деталей конкретного тикета и связанных с ним комментариев.
+   - **UserList**: Компонент для отображения списка пользователей.
+   - **Navbar**: Навигационная панель для перехода между различными разделами приложения.
 
-### `npm test`
+2. **Модели бэкенда**:
+   - **User**: Модель для хранения информации о пользователях (ID, имя, роль).
+   - **Ticket**: Модель для хранения информации о тикетах (ID, заголовок, описание, статус, дата создания).
+   - **Comment**: Модель для хранения комментариев к тикетам (ID, ID тикета, ID пользователя, текст комментария).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### База данных
 
-### `npm run build`
+База данных PostgreSQL содержит три основные таблицы:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **users**: Хранит информацию о пользователях, включая их роли (администратор, поддержка, пользователь).
+- **tickets**: Хранит информацию о тикетах, включая их статус и связь с пользователями.
+- **comments**: Хранит комментарии, связанные с тикетами, и информацию о пользователях, которые их оставили.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Установка и запуск
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **Установка PostgreSQL**: Убедитесь, что PostgreSQL установлен и запущен на вашем компьютере.
+2. **Создание базы данных**: Создайте базу данных `helpdesk` и выполните SQL-скрипт для создания необходимых таблиц.
+3. **Запуск бэкенда**: Перейдите в директорию `server` и выполните команду `node server.js` для запуска сервера.
+4. **Запуск фронтенда**: Перейдите в директорию `client` и выполните команду `npm start` для запуска приложения.
